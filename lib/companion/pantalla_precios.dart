@@ -35,7 +35,6 @@ import 'seleccion_servicio.dart';
 import 'servicio_companion.dart';
 import 'servicio_companion_offline.dart';
 import 'tema/piezas_companion.dart';
-import 'tema/tema_companion.dart';
 import 'tema/chip_seleccionable.dart';
 import 'tema/esqueleto_companion.dart';
 import '../ui/comun/estado_error.dart';
@@ -612,7 +611,7 @@ class _TarjetaProducto extends StatelessWidget {
     final margen = precio == null || costo == null || costo <= 0 || precio <= 0 ? null : gananciaBpDesdeCostoYPrecio(costo, precio);
     final stock = p.esPesable ? p.stockGramos ?? 0 : p.stock;
     final stockTexto = stock <= 0 ? 'Sin stock' : '$stock${p.esPesable ? ' g' : ''} en stock';
-    final detalle = [if (nombreProveedor != null) nombreProveedor!, stockTexto].join(' · ');
+    final detalle = [?nombreProveedor, stockTexto].join(' · ');
     return Superficie(
       padding: EdgeInsets.zero,
       child: Presionable(

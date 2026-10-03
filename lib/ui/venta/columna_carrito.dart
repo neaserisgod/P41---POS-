@@ -25,6 +25,8 @@ import 'tacto_venta.dart';
 import 'cancelar_venta_con_deshacer.dart';
 import 'venta_controlador.dart';
 import '../tema/iconos.dart';
+import '../tema/acentos.dart';
+import '../tema/movimiento.dart';
 
 class ColumnaCarrito extends StatelessWidget {
   const ColumnaCarrito({
@@ -74,6 +76,14 @@ class ColumnaCarrito extends StatelessWidget {
                     // grande no puede redibujarse entero en cada línea agregada
                     // (hardware 2008).
                     itemCount: c.carrito.length,
+                    // Con la clave por producto, sacar una línea del medio no hace re-entrar a las de abajo (sin esto
+                    // la lista reusa las filas por posición y cada una volvería a animarse).
+                    findChildIndexCallback: (clave) {
+                      for (var i = 0; i < c.carrito.length; i++) {
+                        if (_claveLinea(c.carrito[i], i) == clave) return i;
+                      }
+                      return null;
+                    },
                     itemBuilder: (context, index) {
                       final linea = c.carrito[index];
                       final esUltima = index == c.indiceUltimaLinea;
@@ -114,7 +124,14 @@ class ColumnaCarrito extends StatelessWidget {
                       // más ancho que un formulario completo, pero con tope. El
                       // resaltado de la última línea agregada acompaña ese mismo
                       // ancho, no la columna entera.
-                      return Align(
+                      // La línea nueva entra deslizándose; cuando cambia su cantidad, late (2026-10-03).
+                      return Entrada(
+                        key: _claveLinea(linea, index),
+                        child: Pulso(
+                          valor: _descripcionCantidad(linea),
+                          escala: 1.02,
+                          alineacion: Alignment.centerLeft,
+                          child: Align(
                         alignment: Alignment.centerLeft,
                         child: ConstrainedBox(
                           constraints: const BoxConstraints(
@@ -297,6 +314,8 @@ class ColumnaCarrito extends StatelessWidget {
                             ),
                           ),
                         ),
+                          ),
+                        ),
                       );
                     },
                   ),
@@ -305,6 +324,11 @@ class ColumnaCarrito extends StatelessWidget {
       ],
     );
   }
+
+  /// Una línea por producto (sumar el mismo producto sube la cantidad); "Varios" puede repetirse, así que su clave
+  /// lleva también la posición.
+  ValueKey<String> _claveLinea(LineaVenta linea, int index) =>
+      ValueKey('linea-${linea.productoId}${linea.esVarios ? '-$index' : ''}');
 
   String _descripcionCantidad(LineaVenta linea) {
     return switch (linea) {
@@ -475,9 +499,23 @@ class _EstadoVacio extends StatelessWidget {
     if (ventaId == null || totalCentavos == null) {
       return Text('El carrito está vacío', style: textTheme.bodyMedium);
     }
-    return Row(
+    // Cada cobro entra con un tilde y un zoom leve (2026-10-03): confirma que salió, sin frenar la venta siguiente
+    // (el campo ya tiene el foco y se puede seguir escaneando mientras dura).
+    final ganancia = context.acentosPlazoleta.ganancia;
+    return Entrada(
+      key: ValueKey('cobrada-$ventaId'),
+      escala: 0.92,
+      desplazamiento: 0,
+      child: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
+        Container(
+          width: 22,
+          height: 22,
+          decoration: BoxDecoration(color: ganancia.withValues(alpha: 0.14), shape: BoxShape.circle),
+          child: Icon(Icons.check_rounded, size: 15, color: ganancia),
+        ),
+        const SizedBox(width: Espaciado.sm),
         // `Flexible`, no `Text` suelto: en el piso mínimo (1366×768,
         // `DISENO.md`) el carrito queda bastante más angosto que a
         // 1920×1080 — sin esto, un total de varias cifras desborda el
@@ -508,6 +546,7 @@ class _EstadoVacio extends StatelessWidget {
           ),
         ),
       ],
+    ),
     );
   }
 }

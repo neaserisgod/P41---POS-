@@ -21,6 +21,7 @@ import '../tema/tema_inverso.dart';
 import '../tema/presionable.dart';
 import '../tema/superficie.dart';
 import '../tema/tokens.dart';
+import '../tema/movimiento.dart';
 
 class VistaCierres extends StatefulWidget {
   const VistaCierres({super.key, required List<ResumenDia> dias, required this.alAbrirDia, this.busqueda = ''})
@@ -95,11 +96,11 @@ class _VistaCierresState extends State<VistaCierres> {
                   child: ListView.separated(
                     itemCount: dias.length,
                     separatorBuilder: (_, _) => const SizedBox(height: Espaciado.xs),
-                    itemBuilder: (context, i) => _FilaCierre(
+                    itemBuilder: (context, i) => entradaEnLista(i, _FilaCierre(
                       dia: dias[i],
                       elegida: i == elegido,
                       onTap: () => setState(() => _elegido = i),
-                    ),
+                    )),
                   ),
                 ),
               ],

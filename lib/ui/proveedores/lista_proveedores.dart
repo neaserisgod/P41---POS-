@@ -15,6 +15,7 @@ import '../tema/presionable.dart';
 import '../tema/tema.dart';
 import '../tema/tokens.dart';
 import 'proveedores_controlador.dart';
+import '../tema/movimiento.dart';
 
 /// Ancho de la columna: nombre, "N productos" y la insignia en una fila,
 /// sin cortar nombres de proveedor normales.
@@ -69,7 +70,7 @@ class ListaProveedores extends StatelessWidget {
     return ListView.separated(
       itemCount: filas.length,
       separatorBuilder: (_, _) => const SizedBox(height: Espaciado.sm),
-      itemBuilder: (_, i) => filas[i],
+      itemBuilder: (_, i) => entradaEnLista(i, filas[i]),
     );
   }
 }

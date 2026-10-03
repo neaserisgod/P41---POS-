@@ -24,6 +24,7 @@ import '../tema/acentos.dart';
 import '../tema/tokens.dart';
 import '../../domain/marca.dart';
 import '../../servicios/marca_actual.dart';
+import '../comun/marca_pos.dart';
 
 const double _alturaBarra = 40;
 const double _anchoBoton = 46;
@@ -110,10 +111,11 @@ class _MarcoVentanaState extends State<MarcoVentana> with WindowListener {
             r.fecha.month == hoy.month &&
             r.fecha.day == hoy.day,
       );
-      if (mounted)
+      if (mounted) {
         setState(
           () => _ultimoRespaldo = deHoy.isEmpty ? null : deHoy.last.fecha,
         );
+      }
     } catch (_) {
       // Sin carpeta configurada o ilegible: simplemente no hay chip.
     }
@@ -145,13 +147,12 @@ class _MarcoVentanaState extends State<MarcoVentana> with WindowListener {
       return;
     }
     final contexto = widget.navigatorKey.currentContext;
-    if (contexto == null || !mounted) {
+    if (contexto == null || !mounted || !contexto.mounted) {
       await windowManager.destroy();
       return;
     }
     _preguntando = true;
     try {
-      // ignore: use_build_context_synchronously
       final decision = await showDialog<_DecisionCierre>(
         context: contexto,
         barrierColor: const Color(0x6B1F1F1F),
@@ -277,43 +278,9 @@ class _BarraVentana extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 12),
                     child: Row(
                       children: [
-                        // Marca P41 (mock `icono-p41`): la "P" liviana en azul
-                        // claro y el "41" en negrita, sobre el mismo azul del
-                        // ícono. Un poco más ancha que alta para que se lea.
-                        Container(
-                          width: 30,
-                          height: 20,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: colorMarca,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: const Text.rich(
-                            TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: 'P',
-                                  style: TextStyle(
-                                    color: Color(0xFFA8C7FA),
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: '41',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ],
-                              style: TextStyle(
-                                fontSize: 11,
-                                height: 1,
-                                letterSpacing: -0.3,
-                              ),
-                            ),
-                          ),
-                        ),
+                        // El ícono de Nodo Sur POS ("pos" con un punto, 2026-10-03), el mismo de la barra de tareas;
+                        // más tenue cuando la ventana no tiene el foco, como el título.
+                        MarcaPos(fondo: colorMarca, tinta: colores.acentoTexto),
                         const SizedBox(width: 10),
                         ValueListenableBuilder<MarcaNegocio>(
                           valueListenable: marcaActual,

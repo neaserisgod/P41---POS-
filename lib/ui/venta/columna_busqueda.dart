@@ -48,6 +48,7 @@ import 'acciones_venta.dart';
 import 'tacto_venta.dart';
 import 'venta_controlador.dart';
 import '../tema/iconos.dart';
+import '../tema/movimiento.dart';
 
 /// Alto máximo del dropdown de resultados antes de scrollear — "6 a 8
 /// filas" (CLAUDE.md, especificación original de esta pantalla), sin
@@ -157,7 +158,10 @@ class _BarraBusquedaVentaState extends State<BarraBusquedaVenta> {
           // constraint en vez de medirse por su contenido.
           child: UnconstrainedBox(
             alignment: Alignment.topLeft,
-            child: SizedBox(
+            // Cae unos px desde el campo al abrirse (2026-10-03); escribir no la vuelve a animar (es el mismo widget).
+            child: Entrada(
+              desplazamiento: -6,
+              child: SizedBox(
               width: widget.anchoDropdown,
               child: Superficie(
                 // Key propia: desde que la grilla de productos muestra
@@ -186,6 +190,7 @@ class _BarraBusquedaVentaState extends State<BarraBusquedaVenta> {
                   ],
                 ),
               ),
+            ),
             ),
           ),
         );

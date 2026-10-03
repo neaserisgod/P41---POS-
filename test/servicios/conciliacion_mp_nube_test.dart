@@ -5,7 +5,6 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
-import 'package:la_plazoleta/domain/vinculacion.dart';
 import 'package:la_plazoleta/servicios/conciliacion_mp_nube.dart';
 import 'package:la_plazoleta/servicios/cuenta_nube.dart';
 

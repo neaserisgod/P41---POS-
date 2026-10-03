@@ -48,6 +48,15 @@ class _RutaDeDocumentosDePrueba extends Fake
 }
 
 void main() {
+  test('la llave del celular se compara sin cortar en la primera diferencia, y da lo mismo que ==', () {
+    expect(mismosTextosEnTiempoConstante('abc123', 'abc123'), isTrue);
+    expect(mismosTextosEnTiempoConstante('abc124', 'abc123'), isFalse);
+    expect(mismosTextosEnTiempoConstante('abc12', 'abc123'), isFalse);
+    expect(mismosTextosEnTiempoConstante('abc1234', 'abc123'), isFalse);
+    expect(mismosTextosEnTiempoConstante('', 'abc123'), isFalse);
+    expect(mismosTextosEnTiempoConstante(null, 'abc123'), isFalse);
+  });
+
   // Los endpoints /companion/* usan plugins de plataforma (PackageInfo,
   // path_provider) que necesitan el binding inicializado — `testWidgets()`
   // lo trae solo, `test()` no. Ese binding trae de regalo un

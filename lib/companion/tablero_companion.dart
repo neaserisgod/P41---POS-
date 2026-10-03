@@ -17,7 +17,6 @@ import '../ui/comun/fechas.dart';
 import '../ui/comun/grafico_por_hora.dart';
 import '../ui/comun/tarjetas.dart';
 import 'tema/piezas_companion.dart';
-import 'tema/tema_companion.dart';
 import '../ui/tema/acentos.dart';
 import '../ui/tema/iconos.dart';
 import '../ui/tema/tokens.dart';

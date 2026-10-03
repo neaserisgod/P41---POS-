@@ -1,4 +1,4 @@
-// Reemplazo de `Bloque` (`lib/ui/tema/bloque.dart`) para la companion — más
+// Reemplazo de `Bloque` (ya borrado) para la companion — más
 // redondeado, y con un modo de relleno sólido ("color-blocking": la tarjeta
 // entera pintada con el acento, no solo el texto) para las piezas que
 // tienen que saltar a la vista (el total del carrito, el resumen del día).

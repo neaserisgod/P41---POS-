@@ -13,6 +13,7 @@ import 'package:path/path.dart' as p;
 
 import '../domain/conciliacion_mp.dart';
 import '../domain/vinculacion.dart';
+import 'registro_errores.dart';
 
 /// Lo que guarda la PC después de vincularse.
 /// La persona detrás de una cuenta vinculada: `rol` es 'owner' | 'manager' | 'employee' (null si el dispositivo es de antes
@@ -118,7 +119,10 @@ class AlmacenCuentaEnArchivo implements AlmacenCuenta {
   Future<void> borrar() async {
     try {
       if (await _archivo.exists()) await _archivo.delete();
-    } catch (_) {}
+    } catch (e, pila) {
+      // Desvincular sin poder borrar deja el token en disco: que quede anotado.
+      await registrarError('Borrar la cuenta de Nodo Sur vinculada', e, pila);
+    }
   }
 }
 

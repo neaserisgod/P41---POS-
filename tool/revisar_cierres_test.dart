@@ -88,7 +88,7 @@ void main() {
         if (d.gastos != salidasCajon) problemas.add('$etiqueta: salidas del cajón según el cierre ${p(d.gastos)}, según los movimientos ${p(salidasCajon)}');
         if (d.ingresos != entradasCajon) problemas.add('$etiqueta: ingresos al cajón según el cierre ${p(d.ingresos)}, según los movimientos ${p(entradasCajon)}');
       }
-      final mpIndependiente = (s.saldoMpInicialCentavos ?? 0) + ventasMp - salidasMp + entradasMp;
+      final mpIndependiente = s.saldoMpInicialCentavos + ventasMp - salidasMp + entradasMp;
       stdout.writeln('$etiqueta  ef esperado ${p(r.efectivoEsperadoCentavos)} contado ${p(s.efectivoContadoCentavos)} dif ${p(r.diferenciaCentavos)}'
           ' | MP esperado ${p(r.mpEsperadoCentavos)} (cuenta aparte ${p(mpIndependiente)}) contado ${p(s.mpContadoCentavos)}'
           ' | lata final ${p(r.lataFinalCentavos)} contada ${p(s.lataContadoCentavos)}');

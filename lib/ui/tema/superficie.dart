@@ -1,6 +1,4 @@
-// Reemplazo de `Bloque` (`lib/ui/tema/bloque.dart`, sigue en el árbol
-// mientras dura el rollout del remake — se borra en la Fase 6 cuando no
-// quede ninguna referencia) — puerto de
+// Reemplazo de `Bloque` (ya borrado, 2026-10-03) — puerto de
 // `lib/companion/tema/superficie.dart`: más redondeado, con un modo de
 // relleno sólido o degradé ("color-blocking") para las piezas que tienen
 // que saltar a la vista (el total de Venta, el resumen del día).

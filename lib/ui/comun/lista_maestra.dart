@@ -9,6 +9,7 @@ import '../tema/superficie.dart';
 import '../tema/tokens.dart';
 import 'campo_texto.dart';
 import 'estado_vacio.dart';
+import '../tema/movimiento.dart';
 
 class ListaMaestra extends StatefulWidget {
   const ListaMaestra({
@@ -64,7 +65,7 @@ class _ListaMaestraState extends State<ListaMaestra> {
                   ? EstadoVacio(mensaje: widget.mensajeVacio)
                   : ListView.builder(
                       itemCount: widget.items.length,
-                      itemBuilder: (context, i) => widget.items[i],
+                      itemBuilder: (context, i) => entradaEnLista(i, widget.items[i]),
                     ),
             ),
           ],

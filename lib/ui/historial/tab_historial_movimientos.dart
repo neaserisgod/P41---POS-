@@ -19,6 +19,7 @@ import '../tema/superficie.dart';
 import '../tema/tokens.dart';
 import 'periodo_historial.dart';
 import '../tema/esqueleto.dart';
+import '../tema/movimiento.dart';
 
 String etiquetaTipoMovimiento(String tipo) => switch (tipo) {
   'GASTO' => 'Gasto',
@@ -166,7 +167,7 @@ class _Lista extends StatelessWidget {
     return ListView.builder(
       padding: const EdgeInsets.symmetric(vertical: Espaciado.sm),
       itemCount: filas.length,
-      itemBuilder: (context, i) {
+      itemBuilder: (context, i) => entradaEnLista(i, Builder(builder: (context) {
         final f = filas[i];
         if (f is DateTime) {
           return Padding(
@@ -175,7 +176,7 @@ class _Lista extends StatelessWidget {
           );
         }
         return _Fila(m: f as MovimientoDeCaja);
-      },
+      })),
     );
   }
 }

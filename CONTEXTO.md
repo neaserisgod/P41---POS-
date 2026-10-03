@@ -111,8 +111,8 @@ radios grandes, tipografía **Figtree**, títulos grandes y livianos, poco texto
 - Todos los workflows de publicación comparten el grupo de concurrencia `publicar`: van de a uno. **Nunca publicar dos
   veces la misma versión a la vez**: pisan el mismo archivo en R2 y la firma deja de coincidir (pasó con la 2122).
 - Probar en una sesión en la nube: el contenedor no trae Flutter. Bajar Flutter 3.47.5 (la versión de los workflows),
-  `flutter pub get`, `flutter analyze lib` (sin errores; los avisos viejos no tienen que subir) y
-  `flutter test --exclude-tags bench` (~1976 tests, ~5 minutos).
+  `flutter pub get`, `flutter analyze` (tiene que dar "No issues found!", CI lo exige) y
+  `flutter test --exclude-tags bench` (~1981 tests, ~5 minutos).
 
 ## 6. Estado al 2026-10-03
 

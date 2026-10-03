@@ -12,7 +12,6 @@ import '../../ui/tema/tokens.dart';
 import 'chip_icono.dart';
 import 'presionable.dart';
 import 'superficie.dart';
-import 'tema_companion.dart';
 
 class TarjetaAccion extends StatelessWidget {
   const TarjetaAccion({

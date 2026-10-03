@@ -16,7 +16,6 @@ import 'sync_nube_companion.dart';
 import 'tema/fila_dato_companion.dart';
 import 'tema/piezas_companion.dart';
 import 'tema/superficie.dart';
-import 'tema/tema_companion.dart';
 import 'tema/hoja_vidrio.dart';
 
 class PantallaCuentaCompanion extends StatefulWidget {

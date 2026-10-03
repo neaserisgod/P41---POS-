@@ -18,7 +18,9 @@ jobs:
           channel: stable
           cache: true
       - run: flutter pub get
-      - name: Análisis (solo errores; los avisos no frenan)
-        run: flutter analyze --no-fatal-infos --no-fatal-warnings lib
+      # Todo el repo (app, tests y herramientas) tiene que dar "No issues found!" (limpiado el 2026-10-03): un aviso nuevo
+      # frena el PR en vez de acumularse.
+      - name: Análisis (sin avisos)
+        run: flutter analyze
       - name: Tests
         run: flutter test

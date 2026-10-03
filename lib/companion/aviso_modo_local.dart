@@ -22,7 +22,6 @@ import '../ui/tema/tokens.dart';
 import 'servicio_companion.dart';
 import 'servicio_companion_offline.dart';
 import 'tema/superficie.dart';
-import 'tema/tema_companion.dart';
 import '../ui/tema/iconos.dart';
 
 class AvisoModoLocal extends StatelessWidget {

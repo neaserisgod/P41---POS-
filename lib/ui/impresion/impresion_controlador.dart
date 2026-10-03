@@ -6,7 +6,6 @@ import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
 import '../../data/database.dart';
-import '../../data/impresion_posnet.dart';
 import '../../data/pdf_ticket.dart';
 import '../../data/repositorio_ticket.dart';
 import '../../domain/ticket.dart';

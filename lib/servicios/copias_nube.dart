@@ -58,7 +58,7 @@ void _quitarSecretos(String ruta) {
     base.execute(_sentenciaSinSecretos);
     base.execute('VACUUM');
   } finally {
-    base.dispose();
+    base.close();
   }
 }
 

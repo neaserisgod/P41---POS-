@@ -243,13 +243,21 @@ class _TransicionCorta extends PageTransitionsBuilder {
   ) {
     final entrada = CurvedAnimation(parent: animation, curve: Animaciones.curva, reverseCurve: Curves.easeInCubic);
     final tapada = CurvedAnimation(parent: secondaryAnimation, curve: Animaciones.curva, reverseCurve: Curves.easeInCubic);
+    // 2026-10-03 (el dueño: "las animaciones son una miseria"): la pantalla nueva sube un poco además de fundirse y
+    // crecer, y la de abajo se achica y se atenúa, para que el cambio se lea como un paso. Misma duración.
     return FadeTransition(
       opacity: entrada,
-      child: ScaleTransition(
-        scale: Tween<double>(begin: 0.98, end: 1).animate(entrada),
+      child: SlideTransition(
+        position: Tween<Offset>(begin: const Offset(0, 0.015), end: Offset.zero).animate(entrada),
         child: ScaleTransition(
-          scale: Tween<double>(begin: 1, end: 0.99).animate(tapada),
-          child: child,
+          scale: Tween<double>(begin: 0.97, end: 1).animate(entrada),
+          child: FadeTransition(
+            opacity: Tween<double>(begin: 1, end: 0.7).animate(tapada),
+            child: ScaleTransition(
+              scale: Tween<double>(begin: 1, end: 0.985).animate(tapada),
+              child: child,
+            ),
+          ),
         ),
       ),
     );

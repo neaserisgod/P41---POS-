@@ -40,6 +40,7 @@ import '../../domain/modulos.dart';
 import '../../servicios/marca_actual.dart';
 import '../../servicios/modulos_activos.dart';
 import '../comun/dialogo_datos_comercio.dart';
+import '../tema/movimiento.dart';
 
 enum _Vista { hoy, mes }
 
@@ -278,11 +279,14 @@ class _FilaIndicadores extends StatelessWidget {
       children: [
         Expanded(
           flex: 3,
-          child: _HeroVendido(
-            valor: _plata(t.vendidoCentavos),
-            nota: notaVendido,
-            tono: tonoVendido,
-            porHora: t.porHora,
+          // Las tarjetas entran escalonadas (2026-10-03): lo vendido primero, después las chicas y la fila de abajo.
+          child: Entrada(
+            child: _HeroVendido(
+              valor: _plata(t.vendidoCentavos),
+              nota: notaVendido,
+              tono: tonoVendido,
+              porHora: t.porHora,
+            ),
           ),
         ),
         const SizedBox(width: Espaciado.lg),
@@ -292,7 +296,7 @@ class _FilaIndicadores extends StatelessWidget {
             children: [
               for (var i = 0; i < chicas.length; i++) ...[
                 if (i > 0) const SizedBox(height: Espaciado.md),
-                Expanded(child: chicas[i]),
+                Expanded(child: Entrada(orden: i + 1, child: chicas[i])),
               ],
             ],
           ),
@@ -410,14 +414,14 @@ class _FilaDeAbajo extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Expanded(child: _ComoTePagaron(tablero: tablero)),
+        Expanded(child: Entrada(orden: 4, child: _ComoTePagaron(tablero: tablero))),
         const SizedBox(width: Espaciado.lg),
-        Expanded(child: _MasVendidos(tablero: tablero)),
+        Expanded(child: Entrada(orden: 5, child: _MasVendidos(tablero: tablero))),
         const SizedBox(width: Espaciado.lg),
-        Expanded(child: _StockBajo(tablero: tablero)),
+        Expanded(child: Entrada(orden: 6, child: _StockBajo(tablero: tablero))),
         if (conPendientes) ...[
           const SizedBox(width: Espaciado.lg),
-          Expanded(child: _Pendientes(tablero: tablero)),
+          Expanded(child: Entrada(orden: 7, child: _Pendientes(tablero: tablero))),
         ],
       ],
     );

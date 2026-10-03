@@ -131,21 +131,27 @@ class _PantallaEntrarConCuentaState extends State<PantallaEntrarConCuenta> {
         ),
       );
     } on PerfilDesactivado catch (e) {
-      if (mounted) setState(() {
+      if (mounted) {
+        setState(() {
         _error = e.toString();
         _trabajando = false;
       });
+      }
     } on ErrorNube catch (e) {
-      if (mounted) setState(() {
+      if (mounted) {
+        setState(() {
         _error = e.mensaje;
         _hayQueEntrarDeNuevo = e.pideVincularDeNuevo;
         _trabajando = false;
       });
+      }
     } catch (e) {
-      if (mounted) setState(() {
+      if (mounted) {
+        setState(() {
         _error = mensajeDeError(e);
         _trabajando = false;
       });
+      }
     }
   }
 

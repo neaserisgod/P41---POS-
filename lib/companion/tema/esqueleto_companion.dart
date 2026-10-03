@@ -16,7 +16,6 @@ import 'package:flutter/material.dart';
 
 import '../../ui/tema/tokens.dart';
 import 'superficie.dart';
-import 'tema_companion.dart';
 
 /// La caja que pulsa — primitiva de la que se arman [EsqueletoLinea] y
 /// [EsqueletoLista]. Pública para pantallas con una silueta propia que no

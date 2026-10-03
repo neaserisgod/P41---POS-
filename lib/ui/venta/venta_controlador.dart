@@ -34,6 +34,7 @@ import '../../domain/dinero.dart';
 import '../../domain/medio_pago.dart';
 import '../../domain/recargo_cigarrillos.dart';
 import '../../domain/venta.dart';
+import '../../servicios/registro_errores.dart';
 
 class VentaControlador extends ChangeNotifier {
   VentaControlador(this.db, {this.httpClientDePrueba}) {
@@ -818,7 +819,10 @@ class VentaControlador extends ChangeNotifier {
         if (id != null) {
           try {
             await borrarVentaAbierta(db, id);
-          } catch (_) {}
+          } catch (e, pila) {
+            // Nunca frena la venta, pero un borrador que no se borró vuelve a aparecer: que quede anotado.
+            await registrarError('Borrar una venta abierta descartada', e, pila);
+          }
         }
       });
       _activar(pestanaActiva.clamp(0, _pestanas.length - 1));

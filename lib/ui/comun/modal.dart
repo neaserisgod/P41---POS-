@@ -28,6 +28,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../tema/iconos.dart';
+import '../tema/movimiento.dart';
 import '../tema/tokens.dart';
 
 const Color _colorVelo = Color(0x99808080);
@@ -93,7 +94,11 @@ class Modal extends StatelessWidget {
           elevation: 0,
           backgroundColor: Colors.transparent,
           insetPadding: const EdgeInsets.all(Espaciado.xl),
-          child: ConstrainedBox(
+          // Entra con un zoom leve desde 0,96 (2026-10-03), igual en todos los diálogos del kit.
+          child: Entrada(
+            escala: 0.96,
+            desplazamiento: 6,
+            child: ConstrainedBox(
             constraints: restricciones,
             // Rediseño "antigravity": tarjeta blanca muy redondeada con una
             // sombra grande y suave sobre el velo, título liviano y grande,
@@ -163,6 +168,7 @@ class Modal extends StatelessWidget {
                 ),
               ),
             ),
+          ),
           ),
         ),
       ),

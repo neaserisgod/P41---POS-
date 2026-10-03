@@ -14,7 +14,7 @@ hasta que el dueño diga "lanzá"; lo que cambia una regla de negocio se pregunt
 **Hecho:** Fase 0 completa salvo 0.12 y 0.13; Fase 1 casi (ver su estado más abajo); Fase 3 completa en PC y celular; 0.11 número de venta global. Decisiones del dueño aplicadas: tema sigue al sistema, productos sin stock atenuados en la búsqueda de Venta (no se pueden agregar), número global, "Entregar y anotar deuda".
 
 **Lo que sigue, en orden:**
-1. Fase 1 restante: esqueleto de carga en Equilibrio, Dashboard y Cierre (hoy `SizedBox.shrink()`; Respaldo y Comparar precios ya lo tienen). Ojo: el esqueleto anima sin parar y los tests de Equilibrio y Dashboard esperan con `pumpAndSettle` mientras carga, así que se cuelgan: hay que cambiar esos tests a `pump` con duración antes de ponerlo (Cierre es un modal, queda como está); tests de accesibilidad (`test/accesibilidad/`) de Equilibrio, Respaldo, Impresión, los diálogos y el resto del celular; anillo de foco visible; borrar `ColoresPlazoleta.claro/oscuro` y `Bloque`; unificar `companion/tema` en `ui/tema` (el dueño dijo que le da igual: decisión técnica, hacerlo solo si se puede sin cambiar cómo se ve el celular).
+1. Fase 1 restante: esqueleto de carga en Equilibrio, Dashboard y Cierre (hoy `SizedBox.shrink()`; Respaldo y Comparar precios ya lo tienen). Ojo: el esqueleto anima sin parar y los tests de Equilibrio y Dashboard esperan con `pumpAndSettle` mientras carga, así que se cuelgan: hay que cambiar esos tests a `pump` con duración antes de ponerlo (Cierre es un modal, queda como está); tests de accesibilidad (`test/accesibilidad/`) de Equilibrio, Respaldo, Impresión, los diálogos y el resto del celular; anillo de foco visible; ~~borrar `ColoresPlazoleta.claro/oscuro` y `Bloque`~~ (hecho 2026-10-03); unificar `companion/tema` en `ui/tema` (el dueño dijo que le da igual: decisión técnica, hacerlo solo si se puede sin cambiar cómo se ve el celular).
 2. Fase 2 — fricciones por pantalla (lista abajo) y revisar los 37 `catch (_) {}` mudos de la PC.
 3. Fase 4 — avisos y paridad PC/celular. 4. Fase 6 — Mercado Pago. 5. Fase 5 — roles: **el dueño dijo "para después"**; no empezar sin su matriz de permisos.
 6. Pendientes de Fase 0: 0.12 (valores por defecto heredados: fondo $150.000, reserva $70.000, vuelto $100 — pregunta de negocio) y 0.13 (token por celular).
@@ -61,7 +61,7 @@ Cada una con su test. Estado real, incluyendo lo que **corregí de mi propio dia
 Proveedores, Separaciones, Configuración, Encargues, Cierre y 4 pantallas del celular, y lo que fallaba arreglado; ✅ `AlertDialog`/`ElevatedButton` crudos fuera
 del kit (queda a propósito el botón rojo de restaurar); ✅ esqueletos en 4 pantallas; ✅ deshacer en Venta (quitar línea, Esc, cerrar pestaña) y en el carrito
 del celular. **Falta:** pasar `companion/tema` a `ui/tema` (hoy `AcentosCompanion`, chip, `superficie` y `colores_companion` siguen separados — decidir cuál versión
-gana, cambia cómo se ve el celular); borrar los tokens legados `ColoresPlazoleta.claro/oscuro` y `Bloque`; esqueleto en Equilibrio, Respaldo, Comparar precios,
+gana, cambia cómo se ve el celular); ~~borrar los tokens legados `ColoresPlazoleta.claro/oscuro` y `Bloque`~~ (hecho 2026-10-03); esqueleto en Equilibrio, Respaldo, Comparar precios,
 Dashboard y Cierre; tests de accesibilidad de Equilibrio, Respaldo, Impresión, diálogos y el resto del celular; anillo de foco visible; tema oscuro "seguir al
 sistema" (pregunta 5 al dueño).
 
@@ -123,7 +123,7 @@ Webhooks, devolución desde el POS al anular, saldo real en el cierre, QR en pan
 
 ## Fase 7 — Pedido a proveedores por WhatsApp (si se confirma)
 
-Limpieza (cuando se pueda): `.gitignore` de `android/build`, restos de Firestore, `Bloque` y tokens deprecados, ver fallos
+Limpieza: ~~`.gitignore` de `android/build`, restos de Firestore, `Bloque` y tokens deprecados~~ (hecho 2026-10-03; el análisis da "No issues found!" y CI lo exige), ver fallos
 intermitentes de `test/ui/venta/`.
 
 ## Orden

@@ -1,5 +1,4 @@
 import 'package:drift/drift.dart' hide isNull, isNotNull;
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:la_plazoleta/data/database.dart';
 import 'package:la_plazoleta/ui/proveedores/lista_proveedores.dart';

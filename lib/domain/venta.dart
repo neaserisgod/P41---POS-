@@ -23,7 +23,8 @@ enum TipoCigarrillo {
   /// Atado completo. Es lo único que cuenta para el recargo (Regla 6).
   atado,
 
-  /// Suelto. Nunca genera recargo, sin importar el medio de pago.
+  /// Suelto. También lleva recargo por pago virtual, por cigarro (El dueño,
+  /// 2026-09-10; antes no llevaba): ver `recargo_cigarrillos.dart`.
   suelto,
 }
 

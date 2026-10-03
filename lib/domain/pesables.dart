@@ -26,7 +26,8 @@ int subtotalPesable({required int? montoPorKiloCentavos, required int gramos}) {
 
 /// Stock en gramos después de vender [gramosVendidos].
 ///
-/// Puede quedar negativo: el stock informa, nunca bloquea (Regla 8). No es
+/// Puede quedar negativo (Regla 8: sin stock no se puede agregar, pero lo que
+/// ya estaba en el carrito se vende igual). No es
 /// un error, es el estado esperado hasta el próximo conteo físico.
 int stockGramosPosterior({
   required int stockGramosAnterior,

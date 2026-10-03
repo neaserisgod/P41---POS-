@@ -3,7 +3,6 @@
 // valor contado con su rastro ("Conteo físico") y que cambiar de proveedor o de
 // filtro no hace perder lo ya cargado.
 
-import 'package:drift/drift.dart' hide isNull, isNotNull;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:la_plazoleta/companion/base_local.dart';

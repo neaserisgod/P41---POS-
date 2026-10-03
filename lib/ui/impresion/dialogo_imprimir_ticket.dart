@@ -7,7 +7,6 @@ import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/database.dart';
-import '../../data/impresion_posnet.dart';
 import '../../data/numero_venta.dart';
 import '../../data/pdf_ticket.dart';
 import '../../data/repositorio_ticket.dart';

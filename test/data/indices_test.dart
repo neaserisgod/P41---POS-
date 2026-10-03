@@ -1,7 +1,6 @@
 // Índices de las columnas de clave foránea que reciben WHERE/JOIN (auditoría de rendimiento, 2026-10-03): se crean al abrir la
 // base, también en una que ya existía, y repetirlos no rompe nada.
 
-import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:la_plazoleta/data/database.dart';

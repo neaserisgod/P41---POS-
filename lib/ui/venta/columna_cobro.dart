@@ -42,6 +42,7 @@ import 'color_categoria.dart';
 import 'tacto_venta.dart';
 import 'venta_controlador.dart';
 import '../tema/iconos.dart';
+import '../tema/movimiento.dart';
 
 class PanelCobro extends StatelessWidget {
   const PanelCobro({super.key, required this.usuarioId});
@@ -305,7 +306,11 @@ class _TotalHero extends StatelessWidget {
                   // `Metrica`): el total partido en dos líneas es un bug
                   // real, no solo estético — una cifra de plata cortada se
                   // puede leer como un monto distinto.
-                  FittedBox(
+                  // Late cuando cambia (2026-10-03): el número nuevo ya está desde el primer cuadro.
+                  Pulso(
+                    valor: totalAMostrar,
+                    alineacion: Alignment.centerLeft,
+                    child: FittedBox(
                     fit: BoxFit.scaleDown,
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -314,8 +319,18 @@ class _TotalHero extends StatelessWidget {
                       style: Theme.of(context).textTheme.displayLarge!.copyWith(color: textoSobre).tabular,
                     ),
                   ),
-                  if (desglose.tieneAlgoQueMostrar)
-                    Text(
+                  ),
+                  // El desglose aparece y se va suave en vez de empujar la tarjeta de golpe.
+                  AnimatedSize(
+                    duration: Animaciones.corta,
+                    curve: Animaciones.curva,
+                    alignment: Alignment.topLeft,
+                    child: !desglose.tieneAlgoQueMostrar
+                        ? const SizedBox(width: double.infinity)
+                        : Entrada(
+                    key: const ValueKey('desglose'),
+                    desplazamiento: 4,
+                    child: Text(
                       [
                         if (desglose.recargoCigarrillosCentavos > 0)
                           'Recargo QR ${formatearARS(desglose.recargoCigarrillosCentavos)}',
@@ -326,6 +341,8 @@ class _TotalHero extends StatelessWidget {
                       ].join(' · '),
                       style: Theme.of(context).textTheme.bodySmall!.copyWith(color: textoSobre.withValues(alpha: 0.8)).tabular,
                     ),
+                        ),
+                  ),
                 ],
               ),
             ),
@@ -471,10 +488,18 @@ class _BotonMedio extends StatelessWidget {
     final colorContenido = seleccionado
         ? (colorMedio == null ? colores.acentoTexto : context.acentosPlazoleta.textoSobreColor)
         : (colorMedio == null ? colores.textoPrimario : Color.lerp(colorMedio, colores.textoPrimario, 0.35)!);
-    return SizedBox(
+    // Elegido, el color llena el botón con una transición corta y el botón late una vez (2026-10-03).
+    return Pulso(
+      valor: seleccionado,
+      escala: 1.03,
+      child: TweenAnimationBuilder<Color?>(
+      tween: ColorTween(end: colorFondo),
+      duration: Animaciones.corta,
+      curve: Animaciones.curva,
+      builder: (context, fondoAnimado, _) => SizedBox(
       height: TactoVenta.alturaControl,
       child: SuperficieTactil(
-        color: colorFondo,
+        color: fondoAnimado ?? colorFondo,
         borderRadius: BorderRadius.circular(TactoVenta.radio),
         onTap: onPressed,
         child: Padding(
@@ -517,6 +542,8 @@ class _BotonMedio extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      ),
       ),
     );
   }

@@ -633,10 +633,12 @@ Future<List<Producto>> listarProductos(
   // propio creador y no van al celular ni a las listas de gestión.
   final query = db.select(db.productos)..where((p) => p.esVarios.equals(false) & p.esPromo.equals(false));
   if (soloActivos) query.where((p) => p.activo.equals(true));
-  if (categoriaId != null)
+  if (categoriaId != null) {
     query.where((p) => p.categoriaId.equals(categoriaId));
-  if (proveedorId != null)
+  }
+  if (proveedorId != null) {
     query.where((p) => p.proveedorId.equals(proveedorId));
+  }
   if (sinProveedor) query.where((p) => p.proveedorId.isNull());
   if (sinCosto) {
     query.where(
@@ -878,8 +880,9 @@ Future<int?> _precioAutomatico(
   required bool esVarios,
   required int? costoCentavos,
 }) async {
-  if (proveedorId == null || tipoCigarrillo != 'ninguno' || esVarios)
+  if (proveedorId == null || tipoCigarrillo != 'ninguno' || esVarios) {
     return null;
+  }
   if (costoCentavos == null || costoCentavos <= 0) return null;
   final proveedor = await (db.select(
     db.proveedores,

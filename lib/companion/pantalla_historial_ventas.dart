@@ -77,13 +77,6 @@ extension on MedioVentaHistorialCompanion {
     MedioVentaHistorialCompanion.debitCard => 'Débito',
     MedioVentaHistorialCompanion.mixto => 'Mixto',
   };
-
-  IconData get icono => switch (this) {
-    MedioVentaHistorialCompanion.efectivo => IconosPlazoleta.paymentsOutlined,
-    MedioVentaHistorialCompanion.qr => IconosPlazoleta.qrCode,
-    MedioVentaHistorialCompanion.debitCard => IconosPlazoleta.creditCard,
-    MedioVentaHistorialCompanion.mixto => IconosPlazoleta.callSplit,
-  };
 }
 
 class PantallaHistorialVentas extends StatefulWidget {

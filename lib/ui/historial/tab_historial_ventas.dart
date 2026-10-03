@@ -39,6 +39,7 @@ import '../tema/tokens.dart';
 import 'pantalla_editor_venta.dart';
 import 'periodo_historial.dart';
 import '../tema/esqueleto.dart';
+import '../tema/movimiento.dart';
 
 extension on MedioVentaHistorial {
   String get etiqueta => switch (this) {
@@ -272,7 +273,7 @@ class _ListaVentas extends StatelessWidget {
                 ? Center(child: Text('Sin ventas en este período', style: Theme.of(context).textTheme.bodySmall))
                 : ListView.builder(
                     itemCount: filas.length,
-                    itemBuilder: (context, i) {
+                    itemBuilder: (context, i) => entradaEnLista(i, Builder(builder: (context) {
                       final f = filas[i];
                       if (f is DateTime) {
                         final delDia = ventas.where((v) => !v.anulada && DateUtils.isSameDay(v.fecha, f)).fold(0, (a, v) => a + v.totalCentavos);
@@ -280,7 +281,7 @@ class _ListaVentas extends StatelessWidget {
                       }
                       final v = f as VentaDelHistorial;
                       return _FilaVenta(venta: v, elegida: v.ventaId == elegida, onTap: () => alElegir(v.ventaId));
-                    },
+                    })),
                   ),
           ),
         ],

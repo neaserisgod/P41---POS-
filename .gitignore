@@ -73,3 +73,8 @@ signing/
 # Salida de los scripts de instalador
 /dist/
 /installer/Output/
+
+# Lo que genera compilar el APK en una PC (miles de archivos que no van al repo)
+/android/build/
+/android/app/build/
+/android/.kotlin/

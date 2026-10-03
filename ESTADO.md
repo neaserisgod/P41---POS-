@@ -15,16 +15,15 @@ y el detalle en `DECISIONES.md`.
 - **Windows**: estable 1.0.0.2129 (03/10, al 100 %).
 - **Android**: estable 1.0.0+2130 (03/10, al 100 %). **La 1.0.0+2129 de Android quedó rota**: una segunda
   publicación con el mismo número pisó su archivo en R2 y el sitio conserva la firma del anterior. La 2130 la reemplaza
-  (los celulares toman la más nueva); conviene bloquear la 2129 desde `/admin/` → Versiones.
+  (los celulares toman la más nueva). La 2129 quedó **bloqueada** en el sitio (03/10).
 - **Sitio** (`NodoSurPage`): en producción al mezclar a `main`.
 
 ## Métricas
 
-- **Tests**: 1976 verdes (`flutter test --exclude-tags bench`, 2026-10-03). La suite completa a veces muestra 1–3 fallos que cambian de nombre
+- **Tests**: 1981 verdes (`flutter test --exclude-tags bench`, 2026-10-03). La suite completa a veces muestra 1–3 fallos que cambian de nombre
   entre corridas, todos en `test/ui/venta/` (hit-test warnings de Flutter); en aislamiento pasan siempre. Flakiness del
   runner, sin investigar.
-- **`flutter analyze lib`**: sin errores; quedan avisos viejos de estilo (imports sin usar) que no tienen que subir. Los
-  restos de Firestore que se listaban acá ya no existen.
+- **`flutter analyze`**: "No issues found!" en todo el repo (2026-10-03); CI lo exige.
 - **`schemaVersion`**: **50** (`lib/data/database.dart`; las v40–v50 están comentadas en `onUpgrade`).
 - Capturas para revisar a ojo: `flutter test test/ui/capturas_escritorio_test.dart` y
   `test/companion/capturas_companion_test.dart` (PNG en `capturas/`, ignorada por git; no son golden tests).
@@ -122,7 +121,7 @@ obligatorio en cada gasto.
   pago por línea). Los montos y el arqueo salen bien; arreglarlo es un cambio de modelo, y el dueño dejó que quede así
   (`lib/data/planilla_dia.dart`).
 - Carga histórica: sigue producto por producto (el mock proponía totales del día con costo estimado; el dueño decidió no).
-- Limpieza: `.gitignore` no ignora `android/build` ni `android/app/build`; `Bloque` y tokens deprecados.
+
 - Clave privada DSA (`Documents\la_plazoleta_claves\dsa_priv.pem`): respaldarla (USB + otro lugar). Si se pierde, ninguna PC
   instalada recibe más actualizaciones. Firma de código real: sin certificado todavía (SmartScreen avisa).
 

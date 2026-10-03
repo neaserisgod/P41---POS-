@@ -4,11 +4,11 @@
 // comentario completo en `database.dart`).
 //
 // Trabaja en SQL crudo, no con las clases Dart que genera drift por tabla, a
-// propósito: las 14 tablas sincronizables no tienen nada en común del lado
+// propósito: las tablas sincronizables no tienen nada en común del lado
 // Dart (cada una es un tipo distinto, con su propio `Companion`), pero SÍ
 // tienen la misma forma del lado SQL (`global_id`, y `actualizado_en` en las
-// que se editan) — una sola función sirve para las 14 en vez de escribir el
-// mismo upsert catorce veces (Regla 3). La misma función sirve tanto para que
+// que se editan) — una sola función sirve para todas en vez de escribir el
+// mismo upsert una vez por tabla (Regla 3). La misma función sirve tanto para que
 // el servidor reciba filas del celular como para que el celular reciba
 // filas de la PC: sincronizar es simétrico, no le importa quién le manda a
 // quién.
@@ -29,7 +29,7 @@ import 'package:drift/drift.dart';
 import '../domain/stock.dart';
 import 'database.dart';
 
-/// Las 14 tablas que participan de la sincronización y si comparan
+/// Las tablas que participan de la sincronización y si comparan
 /// `actualizado_en` para decidir quién gana un conflicto (`true`) o son un
 /// log de solo-inserción que nunca se pisa, dedupeado por `global_id` nada
 /// más (`false` — Regla 6: un movimiento ya escrito no se edita).

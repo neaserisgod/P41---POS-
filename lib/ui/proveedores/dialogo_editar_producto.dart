@@ -163,8 +163,9 @@ class _DialogoEditarProductoState extends State<_DialogoEditarProducto> {
     final precio = _parsearONulo(_ctrlPrecio.text);
     final costo = _parsearONulo(_ctrlCosto.text);
     if (precio == null || costo == null || costo <= 0) return null;
-    if (precio <= costo)
+    if (precio <= costo) {
       return (texto: 'El precio no cubre el costo', cubre: false);
+    }
     final bp = gananciaBpDesdeCostoYPrecio(costo, precio);
     return (
       texto:
@@ -395,10 +396,12 @@ class _DialogoEditarProductoState extends State<_DialogoEditarProducto> {
         '${h.fecha.day.toString().padLeft(2, '0')}/'
         '${h.fecha.month.toString().padLeft(2, '0')}/${h.fecha.year}';
     final partes = <String>[];
-    if (h.precioCentavos != null)
+    if (h.precioCentavos != null) {
       partes.add('precio ${formatearARS(h.precioCentavos!)}');
-    if (h.costoCentavos != null)
+    }
+    if (h.costoCentavos != null) {
       partes.add('costo ${formatearARS(h.costoCentavos!)}');
+    }
     if (h.precioPorKiloCentavos != null) {
       partes.add('precio/kg ${formatearARS(h.precioPorKiloCentavos!)}');
     }

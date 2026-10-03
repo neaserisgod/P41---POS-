@@ -21,7 +21,6 @@ import 'sync_nube_companion.dart';
 import 'tema/error_en_linea.dart';
 import 'tema/piezas_companion.dart';
 import 'tema/superficie.dart';
-import 'tema/tema_companion.dart';
 
 /// La PC que avisó al sitio, si el celular tiene cuenta. Null si no hay cuenta, no hay PC o no hay internet.
 typedef BuscarPcDeLaCuenta = Future<DatosConexion?> Function();

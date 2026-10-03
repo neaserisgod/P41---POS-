@@ -261,6 +261,18 @@ Middleware _avisoDeCambios() {
   };
 }
 
+/// Compara dos llaves sin cortar en la primera diferencia (revisión 2026-10-03): con `!=` el tiempo de respuesta
+/// dependía de cuántos caracteres coincidían, y desde el wifi del local se podía ir adivinando la llave de a uno.
+bool mismosTextosEnTiempoConstante(String? a, String b) {
+  if (a == null) return false;
+  final x = utf8.encode(a), y = utf8.encode(b);
+  var diferencia = x.length ^ y.length;
+  for (var i = 0; i < y.length; i++) {
+    diferencia |= (i < x.length ? x[i] : 0) ^ y[i];
+  }
+  return diferencia == 0;
+}
+
 /// Exige `X-Companion-Token` en todas las rutas salvo `/ping` (que existe
 /// para que el celular pueda confirmar que encontró la PC antes incluso de
 /// tener un token — el paso previo al emparejamiento).
@@ -282,7 +294,7 @@ Middleware _autenticacion(AppDatabase db) {
 
       final tokenPedido = request.headers[encabezadoToken];
       final tokenReal = await tokenCompanionActual(db);
-      if (tokenReal == null || tokenPedido != tokenReal) {
+      if (tokenReal == null || !mismosTextosEnTiempoConstante(tokenPedido, tokenReal)) {
         return _error(401, 'Token inválido o sin emparejar');
       }
       return innerHandler(request);

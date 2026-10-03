@@ -1,13 +1,10 @@
 // El PDF del día completo (exportar desde el celular): se arma con una venta
 // en efectivo, una anulada y un gasto sin romper, y trae algo que se pueda abrir.
 
-import 'package:drift/drift.dart' show Value;
 import 'package:flutter_test/flutter_test.dart';
-import 'package:la_plazoleta/data/database.dart';
 import 'package:la_plazoleta/data/pdf_dia_completo.dart';
 import 'package:la_plazoleta/data/repositorio_gastos.dart';
 import 'package:la_plazoleta/data/repositorio_ventas.dart';
-import 'package:la_plazoleta/domain/venta.dart';
 import '../helpers/base_para_tests.dart';
 
 void main() {

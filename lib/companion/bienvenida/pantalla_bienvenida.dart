@@ -9,7 +9,7 @@
 // Cada escena nace de la anterior en vez de cortar: la frase de apertura sube y queda de título; las barras de los
 // proveedores se recogen en puntos que saltan y se juntan en uno verde, que espera el conteo de la caja y se vuelve el
 // tilde; el tilde se achica hasta ser el punto del wifi; un círculo oscuro se abre para el escáner y se cierra en el
-// punto verde del logo.
+// punto del logo (blanco al aterrizar).
 //
 // Toda la animación sale de una línea de tiempo en segundos (`_cuadro(t)`), como la historia: "Siguiente" la hace
 // correr hasta la próxima parada. Con "reducir animaciones" salta directo a la parada.
@@ -1000,7 +1000,7 @@ class _PintorFrente extends CustomPainter {
     }
   }
 
-  // El círculo oscuro se cierra en un punto verde, que vuela hasta su lugar en el logo.
+  // El círculo oscuro se cierra en un punto verde, que vuela hasta su lugar en el logo y ahí se vuelve blanco.
   void _puntoFinal(Canvas canvas) {
     final aparece = _em(_pr(t, 11.45, 0.3));
     if (aparece <= 0) return;
@@ -1010,8 +1010,9 @@ class _PintorFrente extends CustomPainter {
     final hasta = _puntoLogo;
     final x = (1 - vuela) * (1 - vuela) * desde.dx + 2 * (1 - vuela) * vuela * control.dx + vuela * vuela * hasta.dx;
     final y = (1 - vuela) * (1 - vuela) * desde.dy + 2 * (1 - vuela) * vuela * control.dy + vuela * vuela * hasta.dy;
-    final lado = 4.6 / 40 * _ladoLogo * aparece;
-    canvas.drawCircle(Offset(x, y), lado / 2, Paint()..color = verdeMarca);
+    final lado = diametroPuntoMarca * _ladoLogo * aparece;
+    // Vuela verde (el "todo bien" de la escena) y al llegar queda blanco, como el punto del logo.
+    canvas.drawCircle(Offset(x, y), lado / 2, Paint()..color = Color.lerp(verdeMarca, colorPuntoMarca, vuela)!);
   }
 
   void _trazo(Canvas canvas, Path camino, double fraccion, Paint pincel) {

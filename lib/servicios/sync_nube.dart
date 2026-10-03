@@ -23,6 +23,7 @@ import 'package:path/path.dart' as p;
 import '../data/database.dart';
 import '../data/registro_sync_nube.dart';
 import 'cuenta_nube.dart';
+import 'registro_errores.dart';
 
 /// Dónde se guarda el registro de la sync. Fuera de la base, junto al token de
 /// la cuenta: restaurar una copia no tiene que dejar un registro que diga que
@@ -73,8 +74,10 @@ class AlmacenEstadoSyncEnArchivo implements AlmacenEstadoSync {
   @override
   Future<void> borrar() async {
     try {
-      await _archivo.delete();
-    } catch (_) {}
+      if (await _archivo.exists()) await _archivo.delete();
+    } catch (e, pila) {
+      await registrarError('Borrar el registro de la sync', e, pila);
+    }
   }
 }
 

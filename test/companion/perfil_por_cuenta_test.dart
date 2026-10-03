@@ -4,7 +4,6 @@ import 'package:drift/drift.dart' show driftRuntimeOptions;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:la_plazoleta/companion/base_local.dart';
-import 'package:la_plazoleta/companion/cliente_companion.dart' show ErrorCompanion;
 import 'package:la_plazoleta/companion/emparejamiento.dart';
 import 'package:la_plazoleta/companion/pantalla_entrar_con_cuenta.dart';
 import 'package:la_plazoleta/companion/perfil_por_cuenta.dart';

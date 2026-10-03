@@ -118,11 +118,11 @@ flutter:
         - asset: fonts/Figtree-Bold.ttf
           weight: 700
 
-# Ícono de la app (escritorio y companion) — logo "P41" (Bruno, 2026-09-18).
-# `dart run flutter_launcher_icons` regenera windows/runner/resources/app_icon.ico
-# y los mipmaps de android/ a partir de esta única imagen fuente.
+# Ícono de la app (escritorio y companion) — "pos" con un punto, tinta y Figtree (opción 4 elegida por el dueño,
+# 2026-10-03; reemplaza al "P41" azul). `dart run flutter_launcher_icons` regenera
+# windows/runner/resources/app_icon.ico y los mipmaps de android/ a partir de esta única imagen fuente.
 flutter_launcher_icons:
-  image_path: "assets/icon/logo_la_plazoleta.png"
+  image_path: "assets/icon/logo_pos.png"
   windows:
     generate: true
   android:
